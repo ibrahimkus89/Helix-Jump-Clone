@@ -7,10 +7,12 @@ public class HlxManager : MonoBehaviour
     [SerializeField] GameObject[] helixRings;
     [SerializeField] float ySpawn =0;
     [SerializeField] float ringDistance =5;
-    [SerializeField] int numberOfRings = 7;
+     public int numberOfRings;
     
     void Start()
     {
+        numberOfRings = GameManager.currentLevelIndex + 5;
+
         for (int i = 0; i < numberOfRings; i++)
         {
             if (i==0)
