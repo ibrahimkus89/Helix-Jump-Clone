@@ -8,7 +8,7 @@ public class Rotate : MonoBehaviour
 
     void Start()
     {
-        
+      Cursor.lockState = CursorLockMode.Locked;
     }
 
     
