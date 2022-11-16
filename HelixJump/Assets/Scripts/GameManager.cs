@@ -24,6 +24,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI currentLevelText;
     [SerializeField] TextMeshProUGUI nextLevelText;
     public static int numberOfPassedRings;
+    public static int Score =0;
+    [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] TextMeshProUGUI highScoreText;
 
     private void Awake()
     {
@@ -34,6 +37,7 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
         numberOfPassedRings = 0;
+        highScoreText.text = "Best Score\n" + PlayerPrefs.GetInt("HighScore",0);
        isGameStarted= gameOver = levelCompleted = false;
     }
 
@@ -45,6 +49,8 @@ public class GameManager : MonoBehaviour
 
         int progress = numberOfPassedRings * 100 / FindObjectOfType<HlxManager>().numberOfRings;
         gameSlider.value = progress;
+
+        scoreText.text =Score.ToString();
 
         if (Input.GetMouseButtonDown(0) && !isGameStarted)
         {
@@ -65,6 +71,12 @@ public class GameManager : MonoBehaviour
 
             if (Input.GetButtonDown("Fire1"))
             {
+                if (Score > PlayerPrefs.GetInt("HighScore",0))
+                {
+                    PlayerPrefs.SetInt("HighScore",Score);
+                }
+
+                Score = 0;
                 SceneManager.LoadScene("Level");
             }
         }
